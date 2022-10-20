@@ -15,6 +15,11 @@
 	<h1>Index page</h1>
 	<img src="./images/winter.jpg" id="id1">
 	<a href="./qna/list">QNA</a>
+	
+	<div>
+		<img alt="" src="/file/qna/75aaf265-c34f-4ed6-a881-1d152e806b18_아이유.jpg">
+		<a href="/fileDown/qna?fileNum=2">Down</a>
+	</div>
 
 
 </body>
