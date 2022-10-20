@@ -21,6 +21,11 @@
 		<a href="/fileDown/qna?fileNum=2">Down</a>
 	</div>
 
+	<div>
+		<img alt="" src="/file/qna/75aaf265-c34f-4ed6-a881-1d152e806b18_아이유.jpg">
+		<a href="/fileDown/notice?fileNum=2">Down</a>
+	</div>	
+
 
 </body>
 </html>

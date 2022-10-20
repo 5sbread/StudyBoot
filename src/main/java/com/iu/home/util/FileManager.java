@@ -14,6 +14,7 @@ import javax.servlet.http.HttpServletResponse;
 import org.springframework.stereotype.Component;
 import org.springframework.util.FileCopyUtils;
 import org.springframework.web.multipart.MultipartFile;
+import org.springframework.web.servlet.view.AbstractView;
 
 import com.iu.home.board.qna.QnaFileVO;
 
@@ -21,7 +22,7 @@ import lombok.extern.slf4j.Slf4j;
 
 @Component
 @Slf4j
-public class FileManager {
+public class FileManager extends AbstractView{
 	
 	//파일 저장
 	public String saveFile(MultipartFile multipartFile, String path) throws Exception {
@@ -48,10 +49,13 @@ public class FileManager {
 
 	
 	//파일
+	@Override
 	protected void renderMergedOutputModel(Map<String, Object> model, HttpServletRequest request, 
 			HttpServletResponse response) throws Exception{
 		
+		//QNA보다 상위 00을 만드는게 더 좋음
 		QnaFileVO qnaFileVO = (QnaFileVO)model.get("fileVO");
+		Sting path = (String)model.get("path");
 		log.info("---------------------------");
 		log.info("FileVO {} ", qnaFileVO);
 		
