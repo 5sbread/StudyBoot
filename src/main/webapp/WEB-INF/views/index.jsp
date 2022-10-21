@@ -13,7 +13,8 @@
 </head>
 <body>
 	<h1>Index page</h1>
-	<img src="./images/winter.jpg" id="id1">
+	<img src="./images/syl_4.jpg" id="id1">
+	<br>
 	<a href="./qna/list">QNA</a>
 	
 	<div>

@@ -21,6 +21,6 @@ public class Transport {
 	}
 	
 	public void airPlane() {
-		log.indo("---- 비행기 타기 ✈️ ----");
+		log.info("---- 비행기 타기 ✈️ ----");
 	}
 }

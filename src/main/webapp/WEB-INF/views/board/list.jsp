@@ -5,7 +5,7 @@
 <html>
 <head>
 <meta charset="UTF-8">
-<title>Insert title here</title>
+<title>📑</title>
 <c:import url="../temp/boot.jsp"></c:import>
 </head>
 <body>

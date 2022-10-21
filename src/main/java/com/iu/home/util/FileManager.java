@@ -55,7 +55,7 @@ public class FileManager extends AbstractView{
 		
 		//QNA보다 상위 00을 만드는게 더 좋음
 		QnaFileVO qnaFileVO = (QnaFileVO)model.get("fileVO");
-		Sting path = (String)model.get("path");
+		String path = (String)model.get("path");
 		log.info("---------------------------");
 		log.info("FileVO {} ", qnaFileVO);
 		
