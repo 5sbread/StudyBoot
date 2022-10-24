@@ -15,6 +15,7 @@ target/
 
 ### Application-secret flie ####
 application-secret.properties
+application-prod.properties
 
 ### IntelliJ IDEA ###
 .idea
