@@ -21,28 +21,34 @@ import lombok.extern.slf4j.Slf4j;
 	//Exception 발생 시 rollback
 @Transactional(rollbackFor = Exception.class)
 public class QnaService {
+	
 	@Autowired
 	private QnaMapper qnaMapper;
+	
 	@Autowired
 	private FileManager fileManager;
+	
+	//application.properties 에서 지정한 파일 경로
 	@Value("${app.upload.qna}")
 	private String path;
 	
+//-------------------------------	
 	public List<QnaVO> getList(Pager pager)throws Exception{
 		pager.makeRow();
 		return qnaMapper.getList(pager);
 	}
+
 	
+//-------------------------------	
 	public int setAdd(QnaVO qnaVO)throws Exception{
-		int result = qnaMapper.setAdd(qnaVO);
+		int result = qnaMapper.setAdd(qnaVO);		
 		
-		
+							//파일 경로
 		File file = new File(path);
 		
 		if(!file.exists()) {
 			boolean check=file.mkdirs();
 		}
-	
 		
 		for(MultipartFile f : qnaVO.getFiles()) {
 			if(!f.isEmpty()) {
@@ -52,11 +58,9 @@ public class QnaService {
 				qnaFileVO.setFileName(fileName);
 				qnaFileVO.setOriName(f.getOriginalFilename());
 				qnaFileVO.setNum(qnaVO.getNum());
-				qnaMapper.setFileAdd(qnaFileVO);
-				
+				qnaMapper.setFileAdd(qnaFileVO);			
 			}
-		}
-		
+		}	
 		return result;
 	}
 
