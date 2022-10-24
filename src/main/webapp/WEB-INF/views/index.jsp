@@ -5,7 +5,7 @@
 <html>
 <head>
 <meta charset="UTF-8">
-<title>Insert title here</title>
+<title>Index 🐱</title>
 
 <c:import url="./temp/boot.jsp"></c:import>
 <link href="/css/test.css" rel="stylesheet">
@@ -14,6 +14,7 @@
 <body>
 	<h1>Index page</h1>
 	<img src="./images/syl_4.jpg" id="id1">
+	<br>
 	<br>
 	<a href="./qna/list">QNA</a>
 	
