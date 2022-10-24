@@ -5,7 +5,7 @@
 <html>
 <head>
 <meta charset="UTF-8">
-<title>Insert title here</title>
+<title>Write 🖋<title>
 </head>
 <c:import url="../temp/boot.jsp"></c:import>
 <c:import url="../temp/summer.jsp"></c:import>
@@ -17,7 +17,7 @@
 		<h1>Board Write Page</h1>
 		<form action="add" method="post" enctype="multipart/form-data">
 			<div class="mb-3">
-			  <label for="title" class="form-label">Titlea</label>
+			  <label for="title" class="form-label">Title</label>
 			  	<input type="text" name="title" class="form-control" id="title" placeholder="제목">
 			</div>
 			<div class="mb-3">
