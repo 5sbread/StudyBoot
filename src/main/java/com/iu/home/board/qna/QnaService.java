@@ -16,7 +16,7 @@ import com.iu.home.util.Pager;
 
 import lombok.extern.slf4j.Slf4j;
 
-@Service
+@Service //객체 생성 안하고 로그 찍을 수 있음
 @Slf4j
 	//Exception 발생 시 rollback
 @Transactional(rollbackFor = Exception.class)
@@ -32,14 +32,13 @@ public class QnaService {
 	@Value("${app.upload.qna}")
 	private String path;
 	
-//-------------------------------	
+// 목록 -------------------------------	
 	public List<QnaVO> getList(Pager pager)throws Exception{
 		pager.makeRow();
 		return qnaMapper.getList(pager);
 	}
 
-	
-//-------------------------------	
+// 글쓰기 -------------------------------	
 	public int setAdd(QnaVO qnaVO)throws Exception{
 		int result = qnaMapper.setAdd(qnaVO);		
 		
@@ -63,5 +62,15 @@ public class QnaService {
 		}	
 		return result;
 	}
-
+	
+// 디테일 -------------------------------		
+	public QnaVO getDetail(QnaVO qnaVO) throws Exception{
+		return qnaMapper.getDetail(qnaVO);
+	}
+	
+	
+	public QnaFileVO getFileDetail(QnaFileVO qnaFileVO) throws Exception{
+		   return qnaMapper.getFileDetail(qnaFileVO);
+	}
+	
 }

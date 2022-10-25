@@ -11,6 +11,7 @@ import javax.servlet.http.HttpServlet;
 import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
 
+import org.springframework.beans.factory.annotation.Value;
 import org.springframework.stereotype.Component;
 import org.springframework.util.FileCopyUtils;
 import org.springframework.web.multipart.MultipartFile;
@@ -23,6 +24,9 @@ import lombok.extern.slf4j.Slf4j;
 @Component
 @Slf4j
 public class FileManager extends AbstractView{
+	
+	@Value("${app.download.base}")
+	private String base;
 	
 	//파일 저장
 	public String saveFile(MultipartFile multipartFile, String path) throws Exception {
@@ -59,7 +63,8 @@ public class FileManager extends AbstractView{
 		log.info("---------------------------");
 		log.info("FileVO {} ", qnaFileVO);
 		
-		File file = new File("D:/result/upload/qna/", qnaFileVO.getFileName());
+							//파일 경로
+		File file = new File(base+path, qnaFileVO.getFileName());
 		
 		//한글 처리
 		response.setCharacterEncoding("UTF-8");
@@ -85,11 +90,6 @@ public class FileManager extends AbstractView{
 		//자원 해제
 		os.close();
 		fi.close();
-		
-		
-		
-		
-		
 		
 	}
 }
