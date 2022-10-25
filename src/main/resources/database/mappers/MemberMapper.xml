@@ -26,20 +26,19 @@
 		</collection>
 	</resultMap>
 	
-	
-	
+
 	<!-- 회원가입 -->
 	<insert id="setJoin" parameterType="MemberVO">
 		INSERT INTO MEMBER(ID, PASSWORD, NAME, EMAIL)
-		VALUES (#{id}, #{password}, #{name}, #{email})
+		VALUES (#{id}, #{password}, #{name}, #{email}, 1)
 	</insert>
 	
 	<insert id="setRole" parameterType="MemberVO">
-		INSERT INTO MEMBER_ROLE (ID, ROLENUM)
-		VALUES (#{id}, #{memberNum})
+		INSERT INTO MEMBER_ROLE
+		VALUES (#{id}, 1)
 		
-		INSERT INTO MEMBER_ROLE VALUES (#{id},
-			(SELECT NUM FROM MEMBER WHERE #{memberNum}=1))
+<!-- 		INSERT INTO MEMBER_ROLE VALUES (#{id},
+			(SELECT NUM FROM ROLE WHERE ROLENAME='ROLE_MEMBER') -->
 	</insert>
 	
 	

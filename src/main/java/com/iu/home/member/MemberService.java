@@ -28,6 +28,10 @@ public class MemberService {
 			throw new Exception();
 		}
 		result = memberMapper.setRole(memberVO);
+		
+		if (result<1) {
+			throw new Exception();
+		}	
 		return result;
 	}
 	
