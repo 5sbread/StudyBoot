@@ -20,4 +20,29 @@
 		VALUES (NULL, #{num}, #{fileName}, #{oriName})
 	</insert>
 	
+	<select id="getDetail" resultMap="getDetailResult" parameterType="QnaVO">
+		FROM QNA Q
+			LEFT JOIN
+			QNAFILES QF
+			ON Q.NUM = QG.NUM
+		WHERE Q.NUM = #{num}	
+	</select>
+	
+	<resultMap type="QnaVO" id="getDetailResult">
+		<id column="num" property="num"/>
+			<result column="title" property="title"/>
+			<result column="contents" property="contents"/>
+			<result column="writer" property="writer"/>
+			<result column="hit" property="hit"/>
+			<result column="regDate" property="regDate"/>
+			<result column="ref" property="ref"/>
+			<result column="step" property="step"/>
+			<result column="depth" property="depth"/>
+		
+		<collection property="QnaFiles" javaType="List" ofType="QnaFileVO">
+			<result column="fileName" property="fileName"/>
+			<result column="oriName" property="oriName"/>
+		</collection>
+	</resultMap>
+	
 </mapper>    

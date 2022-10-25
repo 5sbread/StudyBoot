@@ -32,14 +32,13 @@ public class QnaService {
 	@Value("${app.upload.qna}")
 	private String path;
 	
-//-------------------------------	
+// 목록 -------------------------------	
 	public List<QnaVO> getList(Pager pager)throws Exception{
 		pager.makeRow();
 		return qnaMapper.getList(pager);
 	}
 
-	
-//-------------------------------	
+// 글쓰기 -------------------------------	
 	public int setAdd(QnaVO qnaVO)throws Exception{
 		int result = qnaMapper.setAdd(qnaVO);		
 		
@@ -63,5 +62,15 @@ public class QnaService {
 		}	
 		return result;
 	}
-
+	
+// 디테일 -------------------------------		
+	public QnaVO getDetail(QnaVO qnaVO) throws Exception{
+		return qnaMapper.getDetail(qnaVO);
+	}
+	
+	
+	public void getFileDetail() throws Exception{
+		
+	}
+	
 }
