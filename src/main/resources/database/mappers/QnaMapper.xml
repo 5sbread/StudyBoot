@@ -21,10 +21,11 @@
 	</insert>
 	
 	<select id="getDetail" resultMap="getDetailResult" parameterType="QnaVO">
+		SELECT Q.*, QF.*
 		FROM QNA Q
 			LEFT JOIN
 			QNAFILES QF
-			ON Q.NUM = QG.NUM
+			ON (Q.NUM = QF.NUM)
 		WHERE Q.NUM = #{num}	
 	</select>
 	
@@ -39,10 +40,16 @@
 			<result column="step" property="step"/>
 			<result column="depth" property="depth"/>
 		
-		<collection property="QnaFiles" javaType="List" ofType="QnaFileVO">
-			<result column="fileName" property="fileName"/>
-			<result column="oriName" property="oriName"/>
-		</collection>
+			<collection property="QnaFiles" javaType="List" ofType="QnaFileVO">
+				<id column="filenum" property="fileName"/>
+				<result column="fileName" property="fileName"/>
+				<result column="oriName" property="oriName"/>
+			</collection>
 	</resultMap>
+	
+	<select id="getFileDetail" parameterType="QnaFileVO" resultType="QnaFileVO">
+		SELECT * FROM QNAFILES
+			WHERE FILENUM=#{fileNum};
+	</select>
 	
 </mapper>    
