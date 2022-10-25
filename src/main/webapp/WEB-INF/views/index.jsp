@@ -13,6 +13,21 @@
 </head>
 <body>
 	<h1>Index page</h1>
+	
+	<div>
+		<c:choose>
+			<c:when test="${not empty member}">
+				<a href="./memeber/logout">Logout</a>
+			</c:when>
+			<c:otherwise>
+				<a href="./member/login">Lonin</a>
+				<a href="./member/join">Join</a>
+			</c:otherwise>
+		</c:choose>
+	</div>
+	
+	
+	
 	<img src="./images/syl_4.jpg" id="id1">
 	<br>
 	<br>
