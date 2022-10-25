@@ -7,8 +7,9 @@ import org.springframework.web.servlet.config.annotation.WebMvcConfigurer;
 
 import lombok.extern.slf4j.Slf4j;
 
+
 @Configuration
-@Slf4j
+@Slf4j							//Interface 구현
 public class WebConfig implements WebMvcConfigurer{
 	
 	@Value("${app.upload.base}") //spEl
