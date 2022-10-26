@@ -4,11 +4,12 @@
 <!DOCTYPE html>
 <html>
 <head>
-<meta charset="UTF-8">
-<title>Write 🖋<title>
+	<meta charset="UTF-8">
+	<title>Write 🖋</title>
 </head>
-<c:import url="../temp/boot.jsp"></c:import>
-<c:import url="../temp/summer.jsp"></c:import>
+	<c:import url="../temp/boot.jsp"></c:import>
+	<c:import url="../temp/summer.jsp"></c:import>
+	
 <body>
 	
 	<div class="container-fluid">

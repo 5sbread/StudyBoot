@@ -40,7 +40,7 @@
 			<result column="step" property="step"/>
 			<result column="depth" property="depth"/>
 		
-			<collection property="QnaFiles" javaType="List" ofType="QnaFileVO">
+			<collection property="qnaFileVOs" javaType="List" ofType="QnaFileVO">
 				<id column="filenum" property="fileName"/>
 				<result column="fileName" property="fileName"/>
 				<result column="oriName" property="oriName"/>
