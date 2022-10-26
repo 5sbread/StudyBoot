@@ -37,7 +37,12 @@ public class MemberService {
 	
 // ----------------------------------	
 	public int setRole(MemberVO memberVO) throws Exception{
-		return memberMapper.setRole(memberVO);
-		 
+		return memberMapper.setRole(memberVO); 
 	}
+	
+// ----------------------------------
+	//public int getIdCheck() throws Exception{}
+	
+	
+	
 }

@@ -46,4 +46,22 @@ public class MemberController {
 		session.invalidate();
 		return "redirect:../";
 	}
+	
+// 아이디 체크 -------------------------------	
+	public int getIdCheck () throws Exception{
+		if ( == ) {
+			return 1;
+		}else {
+			return 0;
+		}
+	}
+	
+	
+	
+	
+	
+	
+	
+	
+	
 }
