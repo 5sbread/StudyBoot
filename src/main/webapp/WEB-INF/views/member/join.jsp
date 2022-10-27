@@ -86,6 +86,22 @@
                         <button type="button" class="btn btn-outline-primary" id="joinBtn"><b>📥 회원가입</b></button>
                     </div>
                 </form>
+                
+                <!-- Post tag -->
+                <div>
+                	<button id="test" type="button">Post Test</button>
+                	<button id="test2" type="button">Ajax Get Test</button>
+                	<button id="test3" type="button">Ajax Post Test</button>
+                </div>
+                
+                <div>
+                	<select id="s1">
+                		<option>1</option>
+                		<option>2</option>
+                	</select>
+                	<button type="button" id="s1Add">Add</button>
+                </div>
+                
             </div>
         </div>
     </div>

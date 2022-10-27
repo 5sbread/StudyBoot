@@ -156,4 +156,73 @@ $("#joinBtn").click(function(){
     // if(c){
     //     $("#joinForm").submit();
     // }
-})
+});
+
+
+
+$("#test").click(function(){
+    let teid="123";
+    let tename="bh";
+
+    $.post("test", {
+    //파라미터 명 : 변수명
+        id:teid,
+        name:tename
+    }, function(result){
+        console.log("result : ", result);
+
+        //문자열을 JSON으로 바꾸기
+        result=JSON.parse(result);
+        console.log("name : ", result.name);
+    });
+});
+
+
+//GET Ajax 요청 테스트
+$("#test2").click(function(){
+    let teid = "abc";
+    $.ajax({
+        type:"get",
+        URL:"idCheck",
+        data:{
+            id:teid
+        },
+        success:function(data){
+            console.log("Data : ", data);
+        },
+        error:function(xhr, status, error){
+            console.log("xhr : ", xhr);
+            console.log("status : ", status);
+            console.log("error : ", error);
+        }
+    });
+});
+
+$("#test3").click(function(){
+    let teid = "1234";
+    let tename = "kry";
+    let tearr = [1, 2, 3];
+    $.ajax({
+        type:"post",
+        URL:"test",
+        traditional:true,  //배열 전송
+        data:{
+            id:teid,
+            name:tename
+        },
+        success:function(result){
+            console.log("result : ", result);
+        }
+    });
+});
+
+
+// Add ---------------------------------------------
+let count=3;
+
+$("s1Add").click(function(){
+            //문자열로 Element Add
+    let add = '<option class="abc" id="ab'+count+'">'+count+'</option>';
+    $("#s1").append(add);
+    count++;
+});

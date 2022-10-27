@@ -9,7 +9,10 @@ import org.springframework.web.bind.annotation.PostMapping;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.ResponseBody;
 
+import lombok.extern.slf4j.Slf4j;
+
 @Controller
+@Slf4j
 @RequestMapping("/member/*")
 public class MemberController {
 	
@@ -52,19 +55,26 @@ public class MemberController {
 	@GetMapping("idCheck")
 	@ResponseBody
 	public int getIdCheck (MemberVO memberVO) throws Exception{
-		return memberService.getIdCheck(memberVO);
+		int result = memberService.getIdCheck(memberVO);
 		
-//		int result = 0;
-//		memberVO == null;
-//		if (memberVO != null) {
-//			return 1;
-//		}else {
-//			return 0;
+		//에러 발생 테스트
+//		if(result==0) {
+//			throw new Exception("아아테스트테스트");
 //		}
+		
+		return result;
 	}
 	
-	
-	
+// 테스트용 -------------------------------		
+	@PostMapping("test")
+	@ResponseBody
+	public MemberVO setTest(MemberVO memberVO, String [] ar)throws Exception{
+		log.info("----------------------");
+		log.info("id : {}", memberVO.getId());
+		log.info("name : {}", memberVO.getName());
+		log.info("ar : {}", ar);
+		return memberVO;
+	}
 	
 	
 	
