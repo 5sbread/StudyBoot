@@ -41,8 +41,9 @@ public class MemberService {
 	}
 	
 // ----------------------------------
-	//public int getIdCheck() throws Exception{}
-	
+	public int getIdCheck(MemberVO memberVO) throws Exception{
+		return memberMapper.getIdCheck(memberVO);
+	}
 	
 	
 }

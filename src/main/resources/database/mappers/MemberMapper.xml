@@ -41,5 +41,10 @@
 			(SELECT NUM FROM ROLE WHERE ROLENAME='ROLE_MEMBER') -->
 	</insert>
 	
+	<!-- 아이디 중복확인 -->
+	<select id="getIdCheck" parameterType="MemberVO" resultType="Integer">
+		SELECT COUNT(ID) FROM MEMBER WHERE ID = #{id}
+	</select>
+	
 	
 </mapper>

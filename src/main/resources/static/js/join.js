@@ -32,10 +32,28 @@ $(".check").click(function(){
 let results = [false, false, false, false, false]
 
 //아이디 - 2글자 이상
-$("#intputId").blur(function(){
+$("#inputId").blur(function(){
+    let id = $("#inputId").val();
     let result = nullCheck($("inputId").val(), $("#idCheck"), "ID");
     results[0] = result;
+
+    //id가 비어있지 않을 때         //변수에 담김
+    $.get("./idCheck?id="+id, function(data){
+        console.log(data);
+        if(data=='0'){
+            $("#inputIdResult").html("사용 가능한 ID입니다.")
+        }else{
+            $("#inputIdResult").html("사용 불가능한 ID입니다.")
+        }
+
+    });
 });
+
+
+
+
+
+
 
 //비번 - 2글자 이상
 // $("#inputPw").blur(function(){
