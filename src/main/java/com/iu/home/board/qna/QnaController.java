@@ -25,7 +25,9 @@ public class QnaController {
 	
 	@Autowired
 	private QnaService qnaService;
+
 	
+// 글 쓰기 --------------------------------	
 	@PostMapping("add")
 	public String setAdd(QnaVO qnaVO, RedirectAttributes redirectAttributes)throws Exception{
 		
@@ -40,6 +42,15 @@ public class QnaController {
 		return "board/write";
 	}
 	
+// 글 쓰기 내 파일 삭제 ----------------	
+	@PostMapping("fileDelete")
+	public void setfileDelete(QnaFileVO qnaFileVO)throws Exception{
+		//DB에서 fileNum으로 fileName 조회
+		//그 후 DB에서 삭제
+		//실제 파일 경로에서 파일 삭제
+	}
+	
+// 목록 --------------------------------	
 	@GetMapping("list")
 	public ModelAndView getList(Pager pager)throws Exception{
 		ModelAndView mv = new ModelAndView();
@@ -49,7 +60,8 @@ public class QnaController {
 		mv.setViewName("board/list");
 		return mv;
 	}
-	
+
+// 디테일 --------------------------------	
 	@GetMapping("detail")
 	public ModelAndView getDetail(QnaVO qnaVO) throws Exception{
 		ModelAndView mv = new ModelAndView();
@@ -58,6 +70,7 @@ public class QnaController {
 		mv.setViewName("board/detail");
 		return mv;
 	}
+
 
 	
 }
