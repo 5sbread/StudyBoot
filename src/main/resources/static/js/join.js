@@ -33,98 +33,70 @@ let results = [false, false, false, false, false]
 
 //아이디 - 2글자 이상
 $("#inputId").blur(function(){
+    //id = id 칸에 입력한 값
     let id = $("#inputId").val();
-    let result = nullCheck($("inputId").val(), $("#idCheck"), "ID");
+    //rsult = 
+    let result = nullCheck(id, $("#idCheck"), "ID는");
     results[0] = result;
 
-    //id가 비어있지 않을 때         //변수에 담김
-    $.get("./idCheck?id="+id, function(data){
-        console.log(data);
-        if(data=='0'){
-            $("#inputIdResult").html("사용 가능한 ID입니다.")
-        }else{
-            $("#inputIdResult").html("사용 불가능한 ID입니다.")
-        }
-
-    });
-});
-
-
-
-
+    //ID 중복 확인 Ajax ========================
+    //id가 비어있지 않을 때
+    if(result){                         //변수에 담김
+        $.get("./idCheck?id="+id, function(data){
+            console.log("Data : " +data);
+            if(data=='1'){
+                $("#inputId").val("");
+                $("#inputIdResult").html("사용 불가능한 ID입니다.");
+                result[0]=false;
+            }else{
+                $("#inputIdResult").html("사용 가능한 ID입니다.");
+                result[0]=true;
+            }
+        })
+    };
 
 
 
 //비번 - 2글자 이상
-// $("#inputPw").blur(function(){
-//     let result = nullCheck($("inputPw").val());
-
-//     if(result){
-//         $("pwCheck").html("사용 가능한 비밀번호입니다.")
-//     }else {
-//         $("pwCheck").html("두 글자 이상 입력하세요.");
-//     }
-// });
-//--------
-// $("inputPw").blur(function(){
-//     let result = nullCheck($("inputPw").val(), $("#pwCheck"), "PW");
-//     results[1] = result;
-// });
-
-// $("inputPw").change(function(){
-//     $("inputPwCheck").val("");
-//     results[2]=false;
-//     $("pwReCheck").html("");
-// });
-//--------
 $("intputPw").on({
     blur:function(){
         let result = nullCheck($("inputPw").val(), $("#pwCheck"), "PW");
          results[1] = result;
     },
     change:function(){
-        $("inputPwCheck").val("");
-        results[2]=false;
-         $("pwReCheck").html("");
+        if(result[1]){
+            $("inputPwCheck").val("");
+            results[2]=false;
+            $("pwReCheck").html("비밀번호가 일치하지 않습니다.");
+        }
     }
 })
 
 
-
-
-
-
 //비번확인 - 2글자 이상, 비번과 동일
 $("#inputPwCheck").blur(function(){
-    let result = nullCheck($("inputPw").val(), $("inputPwCheck").val());
+    let result = equals($("#inputPw").val(), $("#inputPwCheck").val());
 
     if(result){
-        $("pwReCheck").html("사용 가능한 비밀번호입니다.")
+        $("#pwReCheck").html("사용 가능한 비밀번호입니다.")
     }else {
-        $("pwReCheck").html("두 글자 이상 입력하세요.");
+        $("#pwReCheck").html("비밀번호가 일치하지 않습니다.");
     }
+    results[2]=result;
 });
+
 
 //이름 - 2글자 이상
 $("#inputName").blur(function(){
-    let result = nullCheck($("inputName").val());
-
-    if(result){
-        $("nameCheck").html("사용 가능한 비밀번호입니다.")
-    }else {
-        $("nameCheck").html("두 글자 이상 입력하세요.");
-    }
+    let result = nullCheck($("inputName").val(), $("#inputNameCheck"), "Name");
+    results[3] = result;
 });
+
 
 //이메일 - 2글자 이상
 $("#inputEmail").blur(function(){
-    let result = nullCheck($("inputEmail").val());
-
-    if(result){
-        $("emCheck").html("사용 가능한 비밀번호입니다.")
-    }else {
-        $("emCheck").html("두 글자 이상 입력하세요.");
-    }
+    let result = nullCheck($("inputEmail").val(), $("#inputEmailCheck"), "Email")
+    results[4]=result;
 });
 
 
@@ -134,6 +106,7 @@ $("#joinBtn").click(function(){
     if(results.includes(false)){
         alert("필수 입력 값을 입력해 주세요.")
     }else {
+        alert("가입하시겠습니까?")
         console.log("success");
         //$("joinForm").submit();
     }
