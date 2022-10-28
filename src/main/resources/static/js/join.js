@@ -110,6 +110,7 @@ $("#joinBtn").click(function(){
         console.log("success");
         //$("joinForm").submit();
     }
+});    
 
 
 
@@ -129,4 +130,4 @@ $("#joinBtn").click(function(){
     // if(c){
     //     $("#joinForm").submit();
     // }
-})
+});

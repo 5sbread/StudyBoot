@@ -1,7 +1,20 @@
 
+//파일 갯수 지정하는 변수
 let count = 1;
 
+function setCount(c){
+    if(c<1 || c>5){
+        c=1;
+    }
+    count=c;
+}
+
 $("#fileAddBtn").click(function(){
+    if(flag){
+        let size = $("#fileAddBody").attr("data-file-size");
+        count=size;
+        flag = false;
+    };
 
     if(count<6){
         let add = '<div class="mb-3">';
@@ -18,16 +31,23 @@ $("#fileAddBtn").click(function(){
 });
 
 // 삭제 버튼
-$(".fileAddBody").on("click",".del", function(){
+$("#fileAddBody").on("click",".del", function(){
     console.log("del");
     $(this).parent().remove();
     count--;
 });
 
 //글 수정시 첨부파일 삭제
+let fag = true;
 $(".deleteFile").click(function(){
     //DB, HDD에서 파일 삭제
     let check = confirm("삭제");
+    
+    if(flag){
+        let size = $("#fileAddBody").attr("size");
+        count=size;
+        flag = false;
+    };
 
     if(check){
         let fileNum = $(this).attr("data-file-num");
@@ -41,6 +61,7 @@ $(".deleteFile").click(function(){
             },
             success:function(result){
                 console.log("result : ", result);
+                count--;
             },
             error:function(){
                 console.log("error");

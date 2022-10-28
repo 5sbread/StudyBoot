@@ -8,7 +8,7 @@
 	<title>Write 🖋</title>
 	<c:import url="../temp/boot.jsp"></c:import>
 	<c:import url="../temp/summer.jsp"></c:import>
-	<script defer src="/js/write.js"></script>
+	<script defer src="/js/fileManager.js"></script>
 
 	<style>
 		.center {
@@ -38,10 +38,8 @@
 			  <textarea class="form-control" name="contents" id="contents"></textarea>
 			</div>
 			
-			<div class="fileAddBody">
-				<%-- <c:forEach>
-					<p><button type="button" class="delteFile" data-file-num="${fileVO.fileNum}">❌</button></p>
-				</c:forEach> --%>
+			<div class="mb-3" id="fileAddBody">
+				
 				
 			</div>
 			
@@ -69,7 +67,7 @@
 	<script type="text/javascript">
     $('#contents').summernote({
         tabsize: 1,
-        height: 500
+        height: 250
       });
 	</script>
 

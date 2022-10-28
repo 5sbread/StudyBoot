@@ -1,13 +1,17 @@
 package com.iu.home.member;
 
 import javax.servlet.http.HttpSession;
+import javax.validation.Valid;
 
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Controller;
+import org.springframework.validation.BindingResult;
 import org.springframework.web.bind.annotation.GetMapping;
+import org.springframework.web.bind.annotation.ModelAttribute;
 import org.springframework.web.bind.annotation.PostMapping;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.ResponseBody;
+import org.springframework.web.servlet.ModelAndView;
 
 @Controller
 @RequestMapping("/member/*")
@@ -18,14 +22,21 @@ public class MemberController {
 	
 // 회원가입 -------------------------------	
 	@GetMapping("join")
-	public void setAdd () throws Exception{
+	public void setAdd (@ModelAttribute MemberVO memberVO) throws Exception{
 		
 	}
 	
 	@PostMapping("join")
-	public String setAdd (MemberVO memberVO) throws Exception{
-		int result = memberService.setJoin(memberVO);
-		return "redirect:../";
+	public ModelAndView setAdd(@Valid MemberVO memberVO, BindingResult bindingResult, ModelAndView mv)throws Exception{	
+		if(bindingResult.hasErrors()) {
+			//검증에 실패하면 회원가입하는 jsp로 foward
+			mv.setViewName("member/join");
+			return mv;
+		}
+		int result = memberService.setAdd(memberVO); 
+		
+		mv.setViewName("redirect:../");
+		return mv;
 	}
 	
 // 로그인 -------------------------------	
@@ -51,7 +62,7 @@ public class MemberController {
 // 아이디 체크 -------------------------------	
 	@GetMapping("idCheck")
 	@ResponseBody
-	public int getIdCheck (MemberVO memberVO) throws Exception{
+	public Integer getIdCheck (MemberVO memberVO) throws Exception{
 		return memberService.getIdCheck(memberVO);
 		
 //		int result = 0;

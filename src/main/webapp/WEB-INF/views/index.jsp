@@ -1,6 +1,8 @@
 <%@ page language="java" contentType="text/html; charset=UTF-8"
     pageEncoding="UTF-8"%>
-<%@ taglib prefix="c" uri="http://java.sun.com/jsp/jstl/core" %>    
+<%@ taglib prefix="c" uri="http://java.sun.com/jsp/jstl/core" %>
+<%@ taglib prefix="spring" uri="http://www.springframework.org/tags" %>
+    
 <!DOCTYPE html>
 <html>
 <head>
@@ -13,15 +15,22 @@
 </head>
 
 <body>
-	<h1>Index page</h1>
+	<h1>=O.O=</h1>
+	<h2><spring:message code="hi"></spring:message> </h2>
+	<h2><spring:message code="test" text="Code가 없을 때 나오는 기본 메세지"></spring:message> </h2>
+	<h3><spring:message code="hi" var="h"></spring:message></h3>
+	<h4>${h}</h4>
 	
 	<div>
 		<c:choose>
 			<c:when test="${not empty member}">
 				<a href="./memeber/logout">Logout</a>
+				<h3>${member.name}님 환영합니다!🎃 현재 로그인 중인 아이디는 ${member.id}입니다.</h3>
+				<h4><spring:message code="welcome" arguments="${member.name}"></spring:message> </h4>
+				<h4><spring:message code="welcome2" arguments="${member.id},${member.name}" argumentSeparator=","></spring:message></h4>
 			</c:when>
 			<c:otherwise>
-				<a href="./member/login">Lonin</a>
+				<a href="./member/login">Longin</a>
 				<a href="./member/join">Join</a>
 			</c:otherwise>
 		</c:choose>
