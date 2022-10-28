@@ -34,11 +34,11 @@ public class MessageConfig implements WebMvcConfigurer {
 	public LocaleResolver locale() {
 		//1. session 사용
 		SessionLocaleResolver resolver = new SessionLocaleResolver();
-		resolver.setDefaultLocale(Locale.KOREAN);
+		resolver.setDefaultLocale(Locale.US);
 		
 		//2. Cookie 사용
 		CookieLocaleResolver cResolver = new CookieLocaleResolver();
-		cResolver.setDefaultLocale(Locale.KOREAN);
+		cResolver.setDefaultLocale(Locale.US);
 		cResolver.setCookieName("lang");
 		
 		//둘 중 하나만 만들어서 리턴하면 됨

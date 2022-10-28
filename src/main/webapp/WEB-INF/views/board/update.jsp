@@ -35,17 +35,17 @@
 					  <textarea class="form-control" name="contents" id="contents"></textarea>
 					</div>
 					
-					<div class="mb-3" id="fileAddResult">
+					<div class="mb-3" id="add" data-file-size="${fileVO.qnaFileVOs.size()}">
 						<c:forEach items="${vo.qnaFiles}" var="fileVO">
-							<p>
-								${fileVO.oriName}
-								<button type="button" class="deleteFile" data-file-num="${fileVO.fileNum}">X</button>
-							</p>
+							<div>
+								<img src="/file/qna/${fileVO.fileName}">
+								<button type="button" class="btn btn-secondary deleteFile" data-file-num="${fileVO.fileNum}">삭제</button>
+							</div>
 						</c:forEach>
 						
 					</div>
 					<div class="mb-3">
-						<button type="button" id="fileAdd">FileAdd</button>
+						<button type="button" id="fileAdd" class="btn btn-secondary">FileAdd</button>
 					</div>
 		
 					

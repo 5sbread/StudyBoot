@@ -1,5 +1,5 @@
-### English
-
-hi=hi
-welcome={0} Welcome
-welcome2=ID is {0}, Name is {1}
+## English
+hi=hello
+welcome= {0}. Welcome
+welcome2= Your ID {0} and name is {1}
+NotBlank= Required

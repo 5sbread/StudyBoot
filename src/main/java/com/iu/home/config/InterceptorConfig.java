@@ -14,6 +14,7 @@ import lombok.extern.slf4j.Slf4j;
 //Legacy의 ***-context.xml 역할
 
 @Configuration //설정 파일이라는 뜻
+@Slf4j
 public class InterceptorConfig implements WebMvcConfigurer{
 	
 	@Autowired //의존성 주입 - IOC(Inversion of Control)
