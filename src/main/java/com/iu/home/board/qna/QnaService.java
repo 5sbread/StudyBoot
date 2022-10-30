@@ -63,6 +63,11 @@ public class QnaService {
 		return result;
 	}
 	
+	//파일 삭제
+	public void setfileDelete(QnaFileVO qnaFileVO) throws Exception{
+		
+	}
+	
 // 디테일 -------------------------------		
 	public QnaVO getDetail(QnaVO qnaVO) throws Exception{
 		return qnaMapper.getDetail(qnaVO);

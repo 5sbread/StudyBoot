@@ -1,5 +1,7 @@
 package com.iu.home.member;
 
+import javax.validation.Valid;
+
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 import org.springframework.transaction.annotation.Transactional;
@@ -41,8 +43,14 @@ public class MemberService {
 	}
 	
 // ----------------------------------
-	//public int getIdCheck() throws Exception{}
-	
+	public Integer getIdCheck(MemberVO memberVO) throws Exception{
+		return memberMapper.getIdCheck(memberVO);
+	}
+
+	public int setAdd(@Valid MemberVO memberVO) {
+		// TODO Auto-generated method stub
+		return 0;
+	}
 	
 	
 }

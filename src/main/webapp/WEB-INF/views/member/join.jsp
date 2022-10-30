@@ -1,6 +1,7 @@
 <%@ page language="java" contentType="text/html; charset=UTF-8"
     pageEncoding="UTF-8"%>
-<%@ taglib prefix="c" uri="http://java.sun.com/jsp/jstl/core" %>     
+<%@ taglib prefix="c" uri="http://java.sun.com/jsp/jstl/core" %> 
+<%@ taglib prefix="form" uri="http://www.springframework.org/tags/form" %>    
 <!DOCTYPE html>
 <html>
 <head>
@@ -21,35 +22,55 @@
                 </div>
                 
                 <!-- 정보 입력 -->
-                <form action="./join" method="post" id="joinForm">
+                <form:form modelAttribute="memberVO" action="./join" method="post" id="joinForm">
                     <div class="my-4">
                         <label for="inputId" class="form-label"><b>아이디</b></label>
-                        <input type="text" name="id" class="form-control border-primary border-opacity-25" id="inputId" placeholder="아이디를 입력해주세요">
+                        <form:input path="id" cssClass="form-control border-primary border-opacity-25" id="inputId"/>
+                        <form:errors path="id" id="inputIdResult"></form:errors>
                         <div class="text-danger" id="idCheck"></div>
                     </div>
                     
                     <div class="my-4"> 
                         <label for="inputPw" class="form-label"><b>비밀번호</b></label>
-                        <input type="password" name="pw" class="form-control border-primary border-opacity-25" id="inputPw" placeholder="비밀번호를 입력해주세요">
+                        <form:password path="pw" cssClass="form-control border-primary border-opacity-25" id="inputPw"/>
+                        <form:errors path="pw"></form:errors>
                         <div class="text-danger" id="pwCheck"></div>
                     </div>
 
                     <div class="my-4"> 
                         <label for="inputPwCheck" class="form-label"><b>비밀번호 확인</b></label>
-                        <input type="password" class="form-control border-primary border-opacity-25" id="inputPwCheck" placeholder="비밀번호를 입력해주세요">
+                        <form:password path="pwCheck" cssClass="form-control border-primary border-opacity-25" id="inputPwCheck"/>
+                        <form:errors path="pwCheck"></form:errors>
                         <div class="text-danger" id="pwReCheck"></div>
                     </div>
                     
                     <div class="mb-4">
                         <label for="inputName" class="form-label"><b>이름</b></label>
-                        <input type="text" name="name" class="form-control border-primary border-opacity-25" id="inputName" placeholder="이름을 입력해주세요">
+                        <form:password path="name" cssClass="form-control border-primary border-opacity-25" id="inputname"/>
+                        <form:errors path="name"></form:errors>
                         <div class="text-danger" id="nameCheck"></div>
                     </div>
                     
                     <div class="mb-4">
                         <label for="inputEmail" class="form-label"><b>이메일</b></label>
-                        <input type="text" name="email" class="form-control border-primary border-opacity-25" id="inputEmail" placeholder="이메일을 입력해주세요">
-                        <div class="text-danger" id="emCheck"></div>
+                        <form:input path="email" cssClass="form-control border-primary border-opacity-25" id="inputEmail"/>
+                        <form:errors path="email"></form:errors>
+                        <div class="text-danger" id="emailCheck"></div>
+                    </div>
+                    
+                    <div class="mb-4">
+                        <label for="inputAge" class="form-label"><b>나이</b></label>
+                        <form:input path="age" cssClass="form-control border-primary border-opacity-25" id="inputAge"/>
+                        <form:errors path="age"></form:errors>
+                        <div class="text-danger" id="ageCheck"></div>
+                    </div>
+                    
+                    <div class="mb-4">
+                        <label for="inputEmail" class="form-label"><b>생일</b></label>
+                        <form:input path="birth" cssClass="form-control border-primary border-opacity-25" id="inputBirth
+                        "/>
+                        <form:errors path="birth"></form:errors>
+                        <div class="text-danger" id="birthCheck"></div>
                     </div>
 
 
@@ -85,7 +106,7 @@
                     <div class="d-grid gap-2 mt-3">
                         <button type="button" class="btn btn-outline-primary" id="joinBtn"><b>📥 회원가입</b></button>
                     </div>
-                </form>
+                </form:form>
             </div>
         </div>
     </div>
