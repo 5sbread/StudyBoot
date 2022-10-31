@@ -46,10 +46,10 @@ $("#inputId").blur(function(){
             console.log("Data : " +data);
             if(data=='1'){
                 $("#inputId").val("");
-                $("#inputIdResult").html("사용 불가능한 ID입니다.");
+                $("#idCheck").html("사용 불가능한 ID입니다.");
                 result[0]=false;
             }else{
-                $("#inputIdResult").html("사용 가능한 ID입니다.");
+                $("#idCheck").html("사용 가능한 ID입니다.");
                 result[0]=true;
             }
         })
@@ -65,7 +65,7 @@ $("intputPw").on({
     },
     change:function(){
         if(result[1]){
-            $("inputPwCheck").val("");
+            $("pwReCheck").val("");
             results[2]=false;
             $("pwReCheck").html("비밀번호가 일치하지 않습니다.");
         }
@@ -75,7 +75,7 @@ $("intputPw").on({
 
 //비번확인 - 2글자 이상, 비번과 동일
 $("#inputPwCheck").blur(function(){
-    let result = equals($("#inputPw").val(), $("#inputPwCheck").val());
+    let result = equals($("#inputPw").val(), $("#pwCheck").val());
 
     if(result){
         $("#pwReCheck").html("사용 가능한 비밀번호입니다.")
@@ -88,14 +88,14 @@ $("#inputPwCheck").blur(function(){
 
 //이름 - 2글자 이상
 $("#inputName").blur(function(){
-    let result = nullCheck($("inputName").val(), $("#inputNameCheck"), "Name");
+    let result = nullCheck($("inputName").val(), $("#nameCheck"), "Name");
     results[3] = result;
 });
 
 
 //이메일 - 2글자 이상
 $("#inputEmail").blur(function(){
-    let result = nullCheck($("inputEmail").val(), $("#inputEmailCheck"), "Email")
+    let result = nullCheck($("inputEmail").val(), $("#emailCheck"), "Email")
     results[4]=result;
 });
 

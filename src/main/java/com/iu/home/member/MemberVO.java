@@ -20,7 +20,6 @@ public class MemberVO {
 	private String id;
 	
 	@NotBlank
-	@Pattern(regexp="(?=.*[0-9])(?=.*[a-z])(?=.*\\\\W)(?=\\\\S+$).{6,12}")
 	private String pw;
 	private String pwCheck;
 	

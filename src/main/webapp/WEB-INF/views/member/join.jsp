@@ -26,51 +26,59 @@
                     <div class="my-4">
                         <label for="inputId" class="form-label"><b>아이디</b></label>
                         <form:input path="id" cssClass="form-control border-primary border-opacity-25" id="inputId"/>
-                        <form:errors path="id" id="inputIdResult"></form:errors>
-                        <div class="text-danger" id="idCheck"></div>
+                        
+                        <!-- JS와 Form검증을 같이 쓰려면 -> html 메세지가 나오는 영역 안에 에러메세지 넣기 -->
+                        <div class="text-danger" id="idCheck">
+	                        <form:errors path="id" id="inputIdResult"></form:errors>
+                        </div>
                     </div>
                     
                     <div class="my-4"> 
                         <label for="inputPw" class="form-label"><b>비밀번호</b></label>
                         <form:password path="pw" cssClass="form-control border-primary border-opacity-25" id="inputPw"/>
-                        <form:errors path="pw"></form:errors>
-                        <div class="text-danger" id="pwCheck"></div>
+                        <div class="text-danger" id="pwCheck">
+	                        <form:errors path="pw"></form:errors>
+                        </div>
                     </div>
 
                     <div class="my-4"> 
                         <label for="inputPwCheck" class="form-label"><b>비밀번호 확인</b></label>
                         <form:password path="pwCheck" cssClass="form-control border-primary border-opacity-25" id="inputPwCheck"/>
-                        <form:errors path="pwCheck"></form:errors>
-                        <div class="text-danger" id="pwReCheck"></div>
+                        <div class="text-danger" id="pwReCheck">
+	                        <form:errors path="pwCheck"></form:errors>
+                        </div>
                     </div>
                     
-                    <div class="mb-4">
+                    <div class="my-4">
                         <label for="inputName" class="form-label"><b>이름</b></label>
-                        <form:password path="name" cssClass="form-control border-primary border-opacity-25" id="inputname"/>
-                        <form:errors path="name"></form:errors>
-                        <div class="text-danger" id="nameCheck"></div>
+                        <form:input path="name" cssClass="form-control border-primary border-opacity-25" id="inputname"/>
+                        <div class="text-danger" id="nameCheck">
+	                        <form:errors path="name"></form:errors>
+                        </div>
                     </div>
                     
                     <div class="mb-4">
                         <label for="inputEmail" class="form-label"><b>이메일</b></label>
                         <form:input path="email" cssClass="form-control border-primary border-opacity-25" id="inputEmail"/>
-                        <form:errors path="email"></form:errors>
-                        <div class="text-danger" id="emailCheck"></div>
+                        <div class="text-danger" id="emailCheck">
+	                        <form:errors path="email"></form:errors>
+                        </div>
                     </div>
                     
                     <div class="mb-4">
                         <label for="inputAge" class="form-label"><b>나이</b></label>
                         <form:input path="age" cssClass="form-control border-primary border-opacity-25" id="inputAge"/>
-                        <form:errors path="age"></form:errors>
-                        <div class="text-danger" id="ageCheck"></div>
+                        <div class="text-danger" id="ageCheck">
+	                        <form:errors path="age"></form:errors>
+                        </div>
                     </div>
-                    
+                      
                     <div class="mb-4">
                         <label for="inputEmail" class="form-label"><b>생일</b></label>
-                        <form:input path="birth" cssClass="form-control border-primary border-opacity-25" id="inputBirth
-                        "/>
-                        <form:errors path="birth"></form:errors>
-                        <div class="text-danger" id="birthCheck"></div>
+                        <form:input path="birth" cssClass="form-control border-primary border-opacity-25" id="inputBirth"/>
+                        <div class="text-danger" id="birthCheck">
+	                        <form:errors path="birth"></form:errors>
+                        </div>
                     </div>
 
 
