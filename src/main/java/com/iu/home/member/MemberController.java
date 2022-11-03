@@ -63,17 +63,18 @@ public class MemberController {
 	
 // 로그인 -------------------------------	
 	@GetMapping("login")
-	public void getLogin () throws Exception{
-		
+	public String getLogin () throws Exception{
+		return "member/login";
 	}
 	
-	@PostMapping("login")	//로그인한 사람을 기억하기 위해 | 연결 유지를 위해 session 사용
-	public String getLogin (MemberVO memberVO, HttpSession session) throws Exception{
-		memberVO = memberService.getLogin(memberVO);
-		session.setAttribute("member", memberVO);
-		
-		return "redirect:../";
-	}
+	// Spring Security 사용해서 주석 처리
+//	@PostMapping("login")	//로그인한 사람을 기억하기 위해 | 연결 유지를 위해 session 사용
+//	public String getLogin (MemberVO memberVO, HttpSession session) throws Exception{
+//		memberVO = memberService.getLogin(memberVO);
+//		session.setAttribute("member", memberVO);
+//		
+//		return "redirect:../";
+//	}
 	
 // 로그아웃 -------------------------------	
 	public String getLogout (HttpSession session) throws Exception{
@@ -95,8 +96,13 @@ public class MemberController {
 //			return 0;
 //		}
 	}
+
 	
-	
+// My Page -------------------------------		
+	@GetMapping("myPage")
+	public void getMyPage () throws Exception {
+		
+	}
 	
 	
 	

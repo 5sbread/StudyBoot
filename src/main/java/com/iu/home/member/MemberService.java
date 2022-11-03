@@ -20,9 +20,10 @@ public class MemberService {
 	private MemberMapper memberMapper;
 
 // 로그인 ----------------------------------
-	public MemberVO getLogin(MemberVO memberVO) throws Exception{
-		return memberMapper.getLogin(memberVO);
-	}
+	// 로그인 처리는 Security에서 함! 내가 만든건 필요없어서 주석처리
+//	public MemberVO getLogin(MemberVO memberVO) throws Exception{
+//		return memberMapper.getLogin(memberVO);
+//	}
 	
 // 회원가입 ----------------------------------	
 	public int setJoin(MemberVO memberVO) throws Exception{

@@ -2,6 +2,7 @@
     pageEncoding="UTF-8"%>
 <%@ taglib prefix="c" uri="http://java.sun.com/jsp/jstl/core" %>
 <%@ taglib prefix="spring" uri="http://www.springframework.org/tags" %>
+<%@ taglib prefix="sec" uri="http://www.springframework.org/security/tags" %>
     
 <!DOCTYPE html>
 <html>
@@ -21,7 +22,9 @@
 	<h3><spring:message code="hi" var="h"></spring:message></h3>
 	<h4>${h}</h4>
 	
-	<div>
+	<!-- Security 사용 전 -->
+	<%-- <div>
+		<!-- <!-- MemberController에서 member로 설정했기 때문에 --> -->
 		<c:choose>
 			<c:when test="${not empty member}">
 				<a href="./memeber/logout">Logout</a>
@@ -34,6 +37,27 @@
 				<a href="./member/join">Join</a>
 			</c:otherwise>
 		</c:choose>
+	</div> --%>
+	
+	<div>
+		<!-- 로그인 성공 -->
+		<sec:authorize access="isAuthenticated()">
+			<sec:authentication property="Principal" var="member"/>
+			<a href="./memeber/logout">Logout</a>
+			<h3>${member.name}님 환영합니다!🎃 현재 로그인 중인 아이디는 ${member.id}입니다.</h3>
+			<h4><spring:message code="welcome" arguments="${member.name}"></spring:message> </h4>
+			<h4><spring:message code="welcome2" arguments="${member.id},${member.name}" argumentSeparator=","></spring:message></h4>
+			
+			<sec:authorize access="hasRole('ADMIN')">
+				<a href="/admin">🍩 Admin</a>
+			</sec:authorize>
+		</sec:authorize>
+		
+		<!-- 로그인 전 -->
+		<sec:authorize access="!isAuthenticated()">
+			<a href="./member/login">  Longin</a>
+			<a href="./member/join">Join</a>
+		</sec:authorize>
 	</div>
 	
 	

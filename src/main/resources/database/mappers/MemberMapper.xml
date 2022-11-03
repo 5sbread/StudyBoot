@@ -6,24 +6,25 @@
 <mapper namespace="com.iu.home.member.MemberMapper">
 
 	<!-- 로그인 -->
-	<select id="getLogin" parameterType="MemberVO" resultMap="getLoginResult">
-		SELECT * FROM M.*, R.*
-			FROM MEMBER M
-				INNER JOIN MEMBER_ROLE MR
-					ON M.ID = MR.ID
-				INNER JOIN ROLE R 
-					ON MR.ROLENUM = R.ROLENUM
-		WHERE M.ID = #{id} AND M.PW = #{pw}
+									<!-- id만 받아오기 때문에 MemberVO에서 String 타입으로 바꾸기 -->
+	<select id="getLogin" parameterType="String" resultMap="getLoginResult">
+		SELECT * FROM MEMBER M
+			INNER JOIN MEMBER_ROLE MR
+				ON M.ID = MR.ID
+			INNER JOIN ROLE R 
+				ON MR.ROLENUM = R.ROLENUM
+		WHERE M.ID = #{username}
 	</select>
 
 	<resultMap type="MemberVO" id="getLoginResult">
-		<id column="ID" property="id"/>
+		<id column="id" property="id"/>
+		<result column="pw" property="pw"/>
 		<result column="name" property="name"/>
 		<result column="email" property="email"/>
 		
-		<collection property="roleVOs" javaType="List" ofType="RoleVO">
-			<id column="ROLENUM" property="roleNum"/>
-			<id column="ROLENAME" property="roleName"/>
+		<collection property="memberRoleVOs" javaType="List" ofType="MemberRoleVO">
+			<id column="roleNum" property="roleNum"/>
+			<id column="roleName" property="roleName"/>
 		</collection>
 	</resultMap>
 	
