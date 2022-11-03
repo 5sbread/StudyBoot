@@ -1,11 +1,14 @@
 package com.iu.home.member;
 
+import java.util.List;
+
 import javax.servlet.http.HttpSession;
 import javax.validation.Valid;
 
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Controller;
 import org.springframework.validation.BindingResult;
+import org.springframework.validation.FieldError;
 import org.springframework.web.bind.annotation.GetMapping;
 import org.springframework.web.bind.annotation.ModelAttribute;
 import org.springframework.web.bind.annotation.PostMapping;
@@ -36,7 +39,23 @@ public class MemberController {
 			mv.setViewName("member/join");
 			return mv;
 		}
-		int result = memberService.setAdd(memberVO); 
+		boolean check = memberService.getMemberError(memberVO, bindingResult);
+		if(check) {
+			log.info("===== 검증 에러 발생 ====");
+			mv.setViewName("member/add");
+		//-------------------------------------------
+			List<FieldError > errors = bindingResult.getFieldErrors();
+			
+			for(FieldError fieldError:errors) {
+				log.info("FieldError => {}", fieldError);
+				log.info("Field = {}", fieldError.getField());
+				log.info("Message => {}", fieldError.getRejectedValue());
+				log.info("Default => {}", fieldError.getDefaultMessage());
+				log.info("Code => {}", fieldError.getCode());
+				mv.addObject(fieldError.getField(), fieldError.getDefaultMessage());
+			}
+		}
+		//int result = memberService.setAdd(memberVO); 
 		
 		mv.setViewName("redirect:../");
 		return mv;
@@ -44,17 +63,18 @@ public class MemberController {
 	
 // 로그인 -------------------------------	
 	@GetMapping("login")
-	public void getLogin () throws Exception{
-		
+	public String getLogin () throws Exception{
+		return "member/login";
 	}
 	
-	@PostMapping("login")	//로그인한 사람을 기억하기 위해 | 연결 유지를 위해 session 사용
-	public String getLogin (MemberVO memberVO, HttpSession session) throws Exception{
-		memberVO = memberService.getLogin(memberVO);
-		session.setAttribute("member", memberVO);
-		
-		return "redirect:../";
-	}
+	// Spring Security 사용해서 주석 처리
+//	@PostMapping("login")	//로그인한 사람을 기억하기 위해 | 연결 유지를 위해 session 사용
+//	public String getLogin (MemberVO memberVO, HttpSession session) throws Exception{
+//		memberVO = memberService.getLogin(memberVO);
+//		session.setAttribute("member", memberVO);
+//		
+//		return "redirect:../";
+//	}
 	
 // 로그아웃 -------------------------------	
 	public String getLogout (HttpSession session) throws Exception{
@@ -76,8 +96,13 @@ public class MemberController {
 //			return 0;
 //		}
 	}
+
 	
-	
+// My Page -------------------------------		
+	@GetMapping("myPage")
+	public void getMyPage () throws Exception {
+		
+	}
 	
 	
 	

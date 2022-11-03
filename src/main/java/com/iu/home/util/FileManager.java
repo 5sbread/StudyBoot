@@ -52,7 +52,7 @@ public class FileManager extends AbstractView{
 	}
 
 	
-	//파일
+	//파일 
 	@Override
 	protected void renderMergedOutputModel(Map<String, Object> model, HttpServletRequest request, 
 			HttpServletResponse response) throws Exception{

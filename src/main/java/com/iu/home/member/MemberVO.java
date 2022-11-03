@@ -1,6 +1,8 @@
 package com.iu.home.member;
 
 import java.sql.Date;
+import java.util.ArrayList;
+import java.util.Collection;
 import java.util.List;
 
 import javax.validation.constraints.Email;
@@ -10,17 +12,19 @@ import javax.validation.constraints.Pattern;
 import javax.validation.constraints.Size;
 
 import org.hibernate.validator.constraints.Range;
+import org.springframework.security.core.GrantedAuthority;
+import org.springframework.security.core.authority.SimpleGrantedAuthority;
+import org.springframework.security.core.userdetails.UserDetails;
 
 import lombok.Data;
 
 @Data
-public class MemberVO {
+public class MemberVO implements UserDetails {
 	
 	@NotBlank(message = "ID 필수 입력!")
 	private String id;
 	
 	@NotBlank
-	@Pattern(regexp="(?=.*[0-9])(?=.*[a-z])(?=.*\\\\W)(?=\\\\S+$).{6,12}")
 	private String pw;
 	private String pwCheck;
 	
@@ -40,6 +44,65 @@ public class MemberVO {
 	@Past
 	private Date birth;
 
-	private List<RoleVO> roleVOs;
+	private List<MemberRoleVO> memberRoleVOs;
+
+	
+	
+	//==== Security ====
+	@Override
+	// ? : any를 뜻함 | extends GrantedAuthority를 상속받는 아무 타입이면 ok
+	// <? super T> T나 T의 부모타입 허용
+	public Collection<? extends GrantedAuthority> getAuthorities() {
+		List<GrantedAuthority> authorities= new ArrayList<>();
+		for(MemberRoleVO memberRoleVO : memberRoleVOs) {
+			
+			//SimpleGrantedAuthority : 객체 생성 후 안에 String 타입의 Role을 넣음
+			//authorities.add : List에 데이터 추가
+			authorities.add(new SimpleGrantedAuthority(memberRoleVO.getRoleName()));
+		}
+		return authorities;
+	}
+	
+	@Override
+	public String getPassword() {
+		// TODO Auto-generated method stub
+		return this.pw;
+	}
+	
+	@Override
+	public String getUsername() {
+		// TODO Auto-generated method stub
+		return this.id;
+	}
+	
+	@Override
+	public boolean isAccountNonExpired() {
+		// 계정 만료 여부
+		// true : 만료 X
+		// false : 만료, 로그인 불가
+		return true;
+	}
+	
+	@Override
+	public boolean isAccountNonLocked() {
+		// 계정 잠김 여부
+		// true  : 계정 잠기지 않음
+		// false : 계정 잠김, 로그인 불가
+		return true;
+	}
+	
+	@Override
+	public boolean isCredentialsNonExpired() {
+		// 비번 만료 여부
+		return true;
+	}
+	
+	
+	// 계정 사용 여부
+	// true : 계정 활성화
+	// false : 계정 비활성화
+	public boolean isEnabled() {
+		return true;
+	}
 
 }
