@@ -1,5 +1,6 @@
 package com.iu.home.config;
 
+import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.context.annotation.Bean;
 import org.springframework.context.annotation.Configuration;
 import org.springframework.security.config.annotation.web.builders.HttpSecurity;
@@ -9,9 +10,26 @@ import org.springframework.security.crypto.bcrypt.BCryptPasswordEncoder;
 import org.springframework.security.crypto.password.PasswordEncoder;
 import org.springframework.security.web.SecurityFilterChain;
 
+import com.iu.home.member.security.LoginFail;
+import com.iu.home.member.security.LoginSeccess;
+import com.iu.home.member.security.LogoutCustom;
+import com.iu.home.member.security.LogoutSeccessCustom;
+
 @Configuration
 @EnableWebSecurity
 public class SecurityConfig {
+	
+	@Autowired
+	private LoginSeccess loginSuccess;
+	
+	@Autowired
+	private LoginFail loginFail;
+	
+	@Autowired
+	private LogoutCustom logoutCustom;
+	
+	@Autowired
+	private LogoutSeccessCustom logoutSeccessCustom;
 	
 	@Bean
 	//public 선언하면 default로 바꾸라는 메세지 뜸
@@ -55,13 +73,16 @@ public class SecurityConfig {
 			.usernameParameter("id") // 아이디 파라미터 명 지정 | 기본 : username
 			.passwordParameter("pw") // 비밀번호 파라미터 명 지정 | 기본 : password
 			.defaultSuccessUrl("/") //로그인 성공시
-			.failureUrl("/member/login") //로그인 실패시
+			//.failureUrl("/member/login?error=true&message=LoginFail") //로그인 실패시
+			.failureHandler(loginFail)
 			.permitAll()
 			.and()
 			
 		.logout()
-			.logoutUrl("out")
-			.logoutSuccessUrl("/")
+			.logoutUrl("/member/logout")
+			//.logoutSuccessUrl("/")
+			.addLogoutHandler(logoutCustom) // 로그아웃 시 해야할 일을 구성
+			.logoutSuccessHandler(logoutSeccessCustom) // 로그아웃 성공 후 해야할 일을 구성
 			.invalidateHttpSession(true)
 			.deleteCookies("JSESSIONID")
 			.permitAll(); // 마지막엔 세미콜론
@@ -76,8 +97,7 @@ public class SecurityConfig {
 		return new BCryptPasswordEncoder();
 	}
 				
-	
-	
+		
 	
 	
 	
