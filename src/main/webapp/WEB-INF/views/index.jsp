@@ -58,7 +58,8 @@
 		
 		<!-- 로그인 전 -->
 		<sec:authorize access="!isAuthenticated()">
-			<a href="./member/login">  Longin</a>
+			<a href="./member/login">Longin</a>
+			<a href="/oauth2/authorization/kakao">Kakao Login</a> <!-- 주소 고정 -->
 			<a href="./member/join">Join</a>
 		</sec:authorize>
 	</div>
