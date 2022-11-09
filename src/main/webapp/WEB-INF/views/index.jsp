@@ -50,6 +50,9 @@
 			<h4><spring:message code="welcome2" arguments="${member.id},${member.name}" argumentSeparator=","></spring:message></h4> --%>
 			
 			<a href="./memeber/logout">Logout</a>
+			<a href="">Kakao Logout</a>
+			
+			<a href="/member/delete">회원 탈퇴</a>
 
 			<sec:authorize access="hasRole('ADMIN')">
 				<a href="/admin">🍩 Admin</a>
@@ -89,8 +92,18 @@
 
 	<!-- 부모 영역(div) 안 자식 영역을 클릭했을 때 이벤트 -->
 	<div id="test">
-
+		
 	</div>
+	
+	<h2>${h}</h2>
+	
+	
+	<script type="text/javascript">
+		${"#logout"}.click(function)(){
+			$("#logout")
+		}
+		
+	</script>
 
 </body>
 </html>

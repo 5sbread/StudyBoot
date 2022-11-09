@@ -7,6 +7,8 @@ import org.springframework.security.core.Authentication;
 import org.springframework.security.web.authentication.logout.LogoutHandler;
 import org.springframework.stereotype.Component;
 
+import com.iu.home.member.MemberVO;
+
 import lombok.extern.slf4j.Slf4j;
 
 @Component
@@ -19,5 +21,9 @@ public class LogoutCustom implements LogoutHandler{
 		request.getSession().invalidate();
 		log.info("==== LogOutHandler ====");
 		
+		// 1. 일반 로그인? | Social 로그인 사용?
+		log.info("Auth : {}", authentication);
+		
+		request.getSession().invalidate();
 	}
 }

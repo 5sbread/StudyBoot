@@ -1,6 +1,6 @@
 package com.iu.home.config;
 
-import java.security.Security;
+import java.util.ArrayList;
 import java.util.Arrays;
 
 import org.springframework.beans.factory.annotation.Autowired;
@@ -8,20 +8,21 @@ import org.springframework.context.annotation.Bean;
 import org.springframework.context.annotation.Configuration;
 import org.springframework.security.config.annotation.web.builders.HttpSecurity;
 import org.springframework.security.config.annotation.web.configuration.EnableWebSecurity;
+import org.springframework.security.config.annotation.web.configuration.WebSecurityConfigurerAdapter;
 import org.springframework.security.config.annotation.web.configuration.WebSecurityCustomizer;
 import org.springframework.security.crypto.bcrypt.BCryptPasswordEncoder;
 import org.springframework.security.crypto.password.PasswordEncoder;
 import org.springframework.security.web.SecurityFilterChain;
 import org.springframework.web.cors.CorsConfiguration;
 import org.springframework.web.cors.CorsConfigurationSource;
-import org.springframework.web.cors.reactive.UrlBasedCorsConfigurationSource;
+import org.springframework.web.cors.UrlBasedCorsConfigurationSource;
 
 import com.iu.home.member.MemberSecurityService;
 import com.iu.home.member.MemberSocialService;
 import com.iu.home.member.security.LoginFail;
 import com.iu.home.member.security.LoginSeccess;
 import com.iu.home.member.security.LogoutCustom;
-import com.iu.home.member.security.LogoutSeccessCustom;
+import com.iu.home.member.security.LogoutSuccessCustom;
 
 @Configuration
 @EnableWebSecurity
@@ -37,7 +38,7 @@ public class SecurityConfig {
 	private LogoutCustom logoutCustom;
 	
 	@Autowired
-	private LogoutSeccessCustom logoutSeccessCustom;
+	private LogoutSuccessCustom logoutSeccessCustom;
 	
 	@Autowired
 	private MemberSecurityService memberSecurityService;
@@ -114,9 +115,9 @@ public class SecurityConfig {
 			.authenticationSuccessHandler(loginSuccess) //로그인 성공 Handler
 			.and()
 			
-		.oauth2Login()	// Social Login 설정
-			.userInfoEndpoint()
-			.userService(memberSocialService)
+//		.oauth2Login()	// Social Login 설정
+//			.userInfoEndpoint()
+//			.userService(memberSocialService)
 			;
 		
 		

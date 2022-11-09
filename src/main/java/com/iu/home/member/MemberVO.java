@@ -4,6 +4,7 @@ import java.sql.Date;
 import java.util.ArrayList;
 import java.util.Collection;
 import java.util.List;
+import java.util.Map;
 
 import javax.validation.constraints.Email;
 import javax.validation.constraints.NotBlank;
@@ -15,11 +16,12 @@ import org.hibernate.validator.constraints.Range;
 import org.springframework.security.core.GrantedAuthority;
 import org.springframework.security.core.authority.SimpleGrantedAuthority;
 import org.springframework.security.core.userdetails.UserDetails;
+import org.springframework.security.oauth2.core.user.OAuth2User;
 
 import lombok.Data;
 
 @Data
-public class MemberVO implements UserDetails {
+public class MemberVO implements UserDetails, OAuth2User {
 	
 	@NotBlank(message = "ID 필수 입력!")
 	private String id;
@@ -46,9 +48,16 @@ public class MemberVO implements UserDetails {
 
 	private List<MemberRoleVO> memberRoleVOs;
 
+	//===== Social Login ==========================================
+	// 소셜로그인하는 회사 명 : Kakao, Naver, Google
+	private String social;
+	
+	//OAuth2User, Token 등 정보 저장
+	private Map<String, Object> attributes;
+
 	
 	
-	//==== Security ====
+	//==== Security ===============================================
 	@Override
 	// ? : any를 뜻함 | extends GrantedAuthority를 상속받는 아무 타입이면 ok
 	// <? super T> T나 T의 부모타입 허용
@@ -103,6 +112,12 @@ public class MemberVO implements UserDetails {
 	// false : 계정 비활성화
 	public boolean isEnabled() {
 		return true;
+	}
+	
+	
+	public Map<String, Object> getAttribute() {
+		// TODO Auto-generated method stub
+		return this.attributes;
 	}
 
 }
