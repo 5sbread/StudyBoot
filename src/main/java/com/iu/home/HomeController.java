@@ -1,7 +1,11 @@
 package com.iu.home;
 
+import java.net.URI;
+import java.util.Calendar;
 import java.util.Enumeration;
+import java.util.HashMap;
 import java.util.List;
+import java.util.Map;
 
 import javax.servlet.http.HttpSession;
 
@@ -20,12 +24,15 @@ import org.springframework.util.MultiValueMap;
 import org.springframework.web.bind.annotation.GetMapping;
 import org.springframework.web.bind.annotation.ResponseBody;
 import org.springframework.web.client.RestTemplate;
+import org.springframework.web.reactive.function.client.WebClient;
 import org.springframework.web.servlet.function.ServerRequest.Headers;
 
 import com.iu.home.board.qna.PostVO;
 import com.iu.home.board.qna.QnaMapper;
 import com.iu.home.board.qna.QnaVO;
 import com.iu.home.member.MemberVO;
+
+import reactor.core.publisher.Mono;
 
 @Controller
 public class HomeController {
@@ -122,6 +129,50 @@ public class HomeController {
 	@ResponseBody
 	public String admin () {
 		return "Admin Role";
+	}
+	
+//	@GetMapping("/web")
+//	public String webClientTest() {
+//		WebClient webClient = WebClient.create();
+//		webClient = WebClient.create("http://localhost:81");
+//		
+//		webClient = WebClient.builder()
+//							 .baseUrl("")
+//							 .defaultHeader("Key", "value")
+//							 .defaultCookie("Key", "value")
+//							 .build();
+//		
+//		Map<String, Object> map = new HashMap<>();
+//		map.put("page", 1);
+//		map.put("kind", "title");
+//		URI("/list", map);
+//		
+//		
+//		webClient.get()
+//				 .uri("/post/1");
+//	}
+	
+	@GetMapping("/web")
+	public String webClientTest() {
+		WebClient webClient = WebClient.builder()
+									   .baseUrl("http://jsonplaceolder.typicode.com")
+									   .build();
+		Mono<PostVO> res = webClient.get()
+									.uri("posts/2")
+									.retrieve()
+									.bodyToMono(PostVO.class);
+		PostVO postVO = res.block();
+		log.info("Result : {}", postVO);
+		
+		return "";
+	}
+
+
+
+
+	private void URI(String string, Map<String, Object> map) {
+		// TODO Auto-generated method stub
+		
 	}
 	
 }
