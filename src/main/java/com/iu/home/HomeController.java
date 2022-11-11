@@ -66,23 +66,24 @@ public class HomeController {
 		HttpEntity<MultiValueMap<String,String>> request = new HttpEntity<MultiValueMap<String,String>>(params, headers);
 		
 		//4. 요청 전송 결과 처리
-		ResponseEntity<List<PostVO>> response = restTemplate.getForEntity("https://jsonplaceholder.typicode.com/posts/1", List.class,request);
+		List<PostVO> postVOs = restTemplate.getForObject("https://jsonplaceholder.typicode.com/posts", List.class,request);
 		//PostVO postVO = response.getBody();
-		log.info("postVO=>{}",posts);
+		log.info("postVO=>{}",postVOs);
 				
 	
 		log.info("=========");
 		Enumeration<String> en = session.getAttributeNames();
+		
 		while(en.hasMoreElements()) {
 			String key = en.nextElement();
 			log.info("Key => {}", key);
 		}
 		SecurityContextImpl context = (SecurityContextImpl)session.getAttribute("SPRING_SECURITY_CONTENXT");
+		
 		if(context!=null) {
 			log.info("Context=>{}",context);
 		}
 //		log.info("Context => {}",(MemberVO)(context.getAuthentication().getPrincipal()));  //에러남
-		
 		
 		log.info("message {} ", message);
 		log.info("default {} ", app);
@@ -131,37 +132,23 @@ public class HomeController {
 		return "Admin Role";
 	}
 	
-//	@GetMapping("/web")
-//	public String webClientTest() {
-//		WebClient webClient = WebClient.create();
-//		webClient = WebClient.create("http://localhost:81");
-//		
-//		webClient = WebClient.builder()
-//							 .baseUrl("")
-//							 .defaultHeader("Key", "value")
-//							 .defaultCookie("Key", "value")
-//							 .build();
-//		
-//		Map<String, Object> map = new HashMap<>();
-//		map.put("page", 1);
-//		map.put("kind", "title");
-//		URI("/list", map);
-//		
-//		
-//		webClient.get()
-//				 .uri("/post/1");
-//	}
+//================================================	
 	
 	@GetMapping("/web")
 	public String webClientTest() {
 		WebClient webClient = WebClient.builder()
-									   .baseUrl("http://jsonplaceolder.typicode.com")
+									   .baseUrl("http://jsonplaceolder.typicode.com/")
 									   .build();
 		Mono<PostVO> res = webClient.get()
 									.uri("posts/2")
 									.retrieve()
 									.bodyToMono(PostVO.class);
 		PostVO postVO = res.block();
+		
+		res.subscribe((s) -> {
+			PostVO pvo = s;
+			log.info("ID : {}", s.getId());
+		});
 		log.info("Result : {}", postVO);
 		
 		return "";
