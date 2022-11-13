@@ -11,6 +11,7 @@ import org.springframework.stereotype.Controller;
 import org.springframework.web.bind.annotation.GetMapping;
 import org.springframework.web.bind.annotation.PostMapping;
 import org.springframework.web.bind.annotation.RequestMapping;
+import org.springframework.web.bind.annotation.ResponseBody;
 import org.springframework.web.multipart.MultipartFile;
 import org.springframework.web.servlet.ModelAndView;
 import org.springframework.web.servlet.mvc.support.RedirectAttributes;
@@ -69,6 +70,15 @@ public class QnaController {
 		mv.addObject("vo", qnaVO);
 		mv.setViewName("board/detail");
 		return mv;
+	}
+	
+// Hack ---------------------------------
+	@GetMapping("hack")
+	@ResponseBody
+	public int hack (QnaVO qnaVO) throws Exception {
+		qnaService.setAdd(qnaVO);
+		
+		return 1;
 	}
 
 

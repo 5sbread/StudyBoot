@@ -17,10 +17,12 @@
 
 <body>
 	<h1>=O.O=</h1>
-	<h2><spring:message code="hi"></spring:message> </h2>
+	
+	<!-- property 사용자 커스텀 메세지 -->
+	<%-- <h2><spring:message code="hi"></spring:message> </h2>
 	<h2><spring:message code="test" text="Code가 없을 때 나오는 기본 메세지"></spring:message> </h2>
 	<h3><spring:message code="hi" var="h"></spring:message></h3>
-	<h4>${h}</h4>
+	<h4>${h}</h4> --%>
 	
 	<!-- Security 사용 전 -->
 	<%-- <div>
@@ -43,11 +45,15 @@
 		<!-- 로그인 성공 -->
 		<sec:authorize access="isAuthenticated()">
 			<sec:authentication property="Principal" var="member"/>
-			<a href="./memeber/logout">Logout</a>
-			<h3>${member.name}님 환영합니다!🎃 현재 로그인 중인 아이디는 ${member.id}입니다.</h3>
-			<h4><spring:message code="welcome" arguments="${member.name}"></spring:message> </h4>
-			<h4><spring:message code="welcome2" arguments="${member.id},${member.name}" argumentSeparator=","></spring:message></h4>
+			<h6>${member.name}님 환영합니다!🎃 현재 로그인 중인 아이디는 ${member.id}입니다.</h6>
+			<%-- <h4><spring:message code="welcome" arguments="${member.name}"></spring:message> </h4>
+			<h4><spring:message code="welcome2" arguments="${member.id},${member.name}" argumentSeparator=","></spring:message></h4> --%>
 			
+			<a href="./memeber/logout">Logout</a>
+			<a href="">Kakao Logout</a>
+			
+			<a href="/member/delete">회원 탈퇴</a>
+
 			<sec:authorize access="hasRole('ADMIN')">
 				<a href="/admin">🍩 Admin</a>
 			</sec:authorize>
@@ -55,7 +61,8 @@
 		
 		<!-- 로그인 전 -->
 		<sec:authorize access="!isAuthenticated()">
-			<a href="./member/login">  Longin</a>
+			<a href="./member/login">Longin</a>
+			<a href="/oauth2/authorization/kakao">Kakao Login</a> <!-- 주소 고정 -->
 			<a href="./member/join">Join</a>
 		</sec:authorize>
 	</div>
@@ -85,8 +92,18 @@
 
 	<!-- 부모 영역(div) 안 자식 영역을 클릭했을 때 이벤트 -->
 	<div id="test">
-
+		
 	</div>
+	
+	<h2>${h}</h2>
+	
+	
+	<script type="text/javascript">
+		${"#logout"}.click(function)(){
+			$("#logout")
+		}
+		
+	</script>
 
 </body>
 </html>

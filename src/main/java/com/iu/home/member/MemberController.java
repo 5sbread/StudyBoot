@@ -6,13 +6,17 @@ import javax.servlet.http.HttpSession;
 import javax.validation.Valid;
 
 import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.security.core.Authentication;
+import org.springframework.security.core.context.SecurityContextImpl;
 import org.springframework.stereotype.Controller;
+import org.springframework.ui.Model;
 import org.springframework.validation.BindingResult;
 import org.springframework.validation.FieldError;
 import org.springframework.web.bind.annotation.GetMapping;
 import org.springframework.web.bind.annotation.ModelAttribute;
 import org.springframework.web.bind.annotation.PostMapping;
 import org.springframework.web.bind.annotation.RequestMapping;
+import org.springframework.web.bind.annotation.RequestParam;
 import org.springframework.web.bind.annotation.ResponseBody;
 import org.springframework.web.servlet.ModelAndView;
 
@@ -63,8 +67,15 @@ public class MemberController {
 	
 // 로그인 -------------------------------	
 	@GetMapping("login")
-	public String getLogin () throws Exception{
-		return "member/login";
+						// 안넘어오면 안담음					Boolean은 null값 오류 X
+	public void getLogin (@RequestParam(required = false) boolean error, String message, Model model) throws Exception{
+		// 로그인 실패했을 때 주소창에 파라미터 추가
+		// Controller에서 받아서 jsp로 다시 보내도 됨
+		
+		if (error) {
+			model.addAttribute("msg", "아이디 또는 비밀번호가 일치하지 않습니다.");
+		}
+		
 	}
 	
 	// Spring Security 사용해서 주석 처리
@@ -81,6 +92,13 @@ public class MemberController {
 		session.invalidate();
 		return "redirect:../";
 	}
+
+// 소셜 로그아웃 -------------------------------	
+	@GetMapping("logoutResult")
+	public String socialLogout () throws Exception {
+		return "redirect:../";
+	}
+	
 	
 // 아이디 체크 -------------------------------	
 	@GetMapping("idCheck")
@@ -103,9 +121,33 @@ public class MemberController {
 	public void getMyPage () throws Exception {
 		
 	}
+
 	
-	
-	
+// My Page -------------------------------		
+	@GetMapping("delete")
+				//세션의 비밀번호와 파라미터 비번이(사용자가 입력한) 일치하는지 확인
+	public ModelAndView setDelete (HttpSession session, String pw) throws Exception {
+		
+		// 1. Social, 일반 구분
+		ModelAndView mv = new ModelAndView();
+		
+		SecurityContextImpl context = (SecurityContextImpl)session.getAttribute("SPRING_SECURITY_CONTEXT");
+			// Security core
+		Authentication authentication = context.getAuthentication();
+		MemberVO memberVO = (MemberVO)authentication.getPrincipal();
+		
+		int result = memberService.setDelete(memberVO);
+		
+		if(result > 0) {
+			// 탈퇴 성공
+			mv.setViewName("redirect:./logout");
+		}else {
+			// 탈퇴 실패
+			mv.setViewName("redirect:/");
+			log.info("탈퇴 실패");
+		}
+		return mv;
+	}
 	
 	
 	
