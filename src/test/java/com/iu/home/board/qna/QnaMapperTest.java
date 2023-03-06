@@ -19,7 +19,7 @@ import org.springframework.transaction.annotation.Transactional;
 
 import com.iu.home.util.Pager;
 
-@SpringBootTest
+//@SpringBootTest
 //@Rollback(true)
 @Transactional
 class QnaMapperTest {
